@@ -3,7 +3,7 @@
   "owner": {
     "name": "Ben AI"
   },
-  "description": "Seven Claude Code mods that cut token cost, plus a /mods switchboard and a /savings pane",
+  "description": "Seven Claude Code mods that cut token cost, plus a /mods switchboard, a /savings pane, Helper Desk and Chat Inventory",
   "plugins": [
     {
       "name": "input-router",
@@ -50,13 +50,25 @@
     {
       "name": "mods",
       "source": "./plugins/mods",
-      "description": "A Mods pane that finds every mod on this Mac by itself, turns each one on or off in every chat, and opens the side-pane ones",
-      "version": "0.2.0"
+      "description": "A Mods pane that finds every mod on this Mac by itself, also the ones installed from a marketplace, turns each one on or off in every chat, and opens the side-pane ones",
+      "version": "0.3.0"
     },
     {
       "name": "savings-proof",
       "source": "./plugins/savings-proof",
       "description": "/savings opens the Savings Proof pane: every token the other mods saved, with today's and this chat's totals",
+      "version": "0.2.0"
+    },
+    {
+      "name": "helper-desk",
+      "source": "./plugins/helper-desk",
+      "description": "Helper Desk: a purple task progress bar above the prompt that moves as each to-do item is done, and a side pane with one live card per subagent",
+      "version": "0.4.0"
+    },
+    {
+      "name": "chat-inventory",
+      "source": "./plugins/chat-inventory",
+      "description": "A side pane, In this chat, that lists the to-do list, connectors, context files and skills this chat used",
       "version": "0.2.0"
     }
   ]

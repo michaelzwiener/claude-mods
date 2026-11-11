@@ -1,9 +1,10 @@
 {
   "name": "mods",
-  "version": "0.2.0",
-  "description": "A Mods pane that finds every mod on this Mac by itself, turns each one on or off in every chat, and opens the side-pane ones",
-  "types": "./types/index.d.ts",
+  "version": "0.3.0",
+  "description": "A Mods pane that finds every mod on this Mac by itself, also the ones installed from a marketplace, turns each one on or off in every chat, and opens the side-pane ones",
   "author": {
-    "name": "Ben AI"
-  }
+    "name": "Ben AI",
+    "url": "https://www.benai.co"
+  },
+  "types": "./types/index.d.ts"
 }

@@ -37,6 +37,8 @@ Some mods can use more tools. They work without them.
    /plugin install efficient-browser-use@token-saving-mods
    /plugin install mods@token-saving-mods
    /plugin install savings-proof@token-saving-mods
+   /plugin install helper-desk@token-saving-mods
+   /plugin install chat-inventory@token-saving-mods
    ```
 
 5. Load them. Type:
