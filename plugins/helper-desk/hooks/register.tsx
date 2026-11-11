@@ -983,6 +983,12 @@ export const register: Register = on => {
         syncTimers($)
       }
     }
+    // The subagent monitor opens when a chat starts, unless it is off or hidden.
+    // Not after a compaction or /clear, so a pane the person closed stays closed.
+    const source = (e as { source?: string }).source
+    if (!off && !hidden && source !== 'compact' && source !== 'clear') {
+      void openPane($).catch(err => log($, `open at start: ${String(err)}`))
+    }
     return next(e)
   })
 
@@ -1288,11 +1294,8 @@ export const register: Register = on => {
       return (
         <Box key={`grp-${id}`} flexDirection="column" width={width} marginTop={1}>
           <Box key={`head-${id}`} flexDirection="row" width={width} backgroundColor={fill} paddingX={1} marginBottom={1}>
-            <Button key={`group-${id}`} plain onPress={() => undefined}>
-              <Text bold color={ink} backgroundColor={fill}>
-                {folded ? '▸ ' : '▾ '}
-              </Text>
-            </Button>
+            {/* This engine takes a Button's label as plain text only, not styled Text children. */}
+            <Button key={`group-${id}`} label={folded ? '▸' : '▾'} plain onPress={() => undefined} />
             <Text bold color={ink} backgroundColor={fill} wrap="truncate-end">
               {label.padEnd(room)}
             </Text>

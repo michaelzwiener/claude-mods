@@ -380,6 +380,28 @@ for (const surface of ['desktop', 'terminal'] as const) {
     expect(await v.find({ text: /Build the landing page/ }), 'the card draws').toBeDefined()
   })
 
+  test(`the pane opens when a chat starts, before any subagent (${surface})`, { timeoutMs: 30000 }, async ($, on) => {
+    const { opened, clock } = rig(on, {})
+    await $.session.start({ source: 'startup', cwd: '/Users/test/vault', surface, isInteractive: true } as never)
+    await clock.settle()
+    expect(opened, 'open at start').toContain('helpers')
+  })
+
+  test(`hidden, the pane stays shut at chat start (${surface})`, { timeoutMs: 30000 }, async ($, on) => {
+    const files: Record<string, string> = { '*/.claude/mods/switches.json': JSON.stringify({ 'helper-desk:hidden': true }) }
+    const { opened, clock } = rig(on, files)
+    await $.session.start({ source: 'startup', cwd: '/Users/test/vault', surface, isInteractive: true } as never)
+    await clock.settle()
+    expect(opened, 'hidden: no open at start').not.toContain('helpers')
+  })
+
+  test(`after a compaction the pane is not reopened (${surface})`, { timeoutMs: 30000 }, async ($, on) => {
+    const { opened, clock } = rig(on, {})
+    await $.session.start({ source: 'compact', cwd: '/Users/test/vault', surface, isInteractive: true } as never)
+    await clock.settle()
+    expect(opened, 'no open after compact').not.toContain('helpers')
+  })
+
   test(`the plan tool writes the plan file and draws "2 of 4" (${surface})`, { timeoutMs: 30000 }, async ($, on) => {
     const files: Record<string, string> = {}
     const { clock, ran } = rig(on, files)
