@@ -558,6 +558,13 @@ export const register: Register = (on, options) => {
     // A fork inherits its parent's model; a resume keeps its own.
     if (!routeSubagentModel || e.fork || e.resume) return next(e)
 
+    // A model the caller named is a choice, not a default: run it as asked and
+    // skip the judge (no Haiku call, no ledger line). Only unnamed models route.
+    if (asked) {
+      await log($, `${e.subagentType}${task}: kept ${asked}: model named by the caller`)
+      return next(e)
+    }
+
     // The pane's card goes up before Haiku answers, so the judging shows.
     const cardId = await addCard($, {
       agentType: e.subagentType,
